@@ -1,5 +1,5 @@
 // Electron-side settlement store (mirrors MCP store for direct IPC access)
-import type { SettlementData } from '../src/types/settlement';
+import type { SettlementData } from './types';
 
 export class SettlementStore {
   private settlements: Map<string, SettlementData> = new Map();

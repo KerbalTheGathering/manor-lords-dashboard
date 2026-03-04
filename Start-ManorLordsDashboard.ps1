@@ -86,8 +86,10 @@ if (-not (Test-Path "node_modules")) {
     }
 } else {
     # Check if package-lock.json is newer than node_modules
-    $lockTime = (Get-Item "package-lock.json" -ErrorAction SilentlyContinue)?.LastWriteTime
-    $modulesTime = (Get-Item "node_modules" -ErrorAction SilentlyContinue)?.LastWriteTime
+    $lockItem = Get-Item "package-lock.json" -ErrorAction SilentlyContinue
+    $modulesItem = Get-Item "node_modules" -ErrorAction SilentlyContinue
+    $lockTime = if ($lockItem) { $lockItem.LastWriteTime } else { $null }
+    $modulesTime = if ($modulesItem) { $modulesItem.LastWriteTime } else { $null }
     if ($lockTime -and $modulesTime -and ($lockTime -gt $modulesTime)) {
         Write-Host "  Dependencies changed, updating..." -ForegroundColor Yellow
         npm install

@@ -1,4 +1,4 @@
-import type { SettlementData } from '../src/types/settlement';
+import type { SettlementData } from './types';
 import * as fs from 'fs';
 
 export class SettlementStore {
